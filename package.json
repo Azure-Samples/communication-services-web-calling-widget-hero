@@ -1,0 +1,23 @@
+{
+    "name": "communication-services-web-calling-widget",
+    "version": "1.0.0",
+    "description": "--- page_type: sample languages: - javascript - nodejs - products: - azure - azure-communication-services ---",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "setup": "cd server && npm install && cd ../app && npm install && cd ..",
+      "start": "cd app && npm run start && cd ..",
+      "build": "cd server && npm run build && cd ../app && npm run build && cd ..",
+      "package": "cd app && npm run package && cd .."
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Azure-Samples/communication-services-javascript-quickstarts.git"
+    },
+    "author": "",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/Azure-Samples/communication-services-javascript-quickstarts/issues"
+    },
+    "homepage": "https://github.com/Azure-Samples/communication-services-javascript-quickstarts/tree/main/ui-library-click-to-call"
+  }
+  
