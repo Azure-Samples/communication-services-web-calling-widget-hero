@@ -1,13 +1,17 @@
-import { CommunicationUserIdentifier, AzureCommunicationTokenCredential } from '@azure/communication-common';
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
 import {
-    CallAdapter,
-    CallAdapterLocator,
-    CallComposite,
-    useAzureCommunicationCallAdapter
-} from '@azure/communication-react';
-import { Spinner, Stack } from '@fluentui/react';
-import React, { useMemo } from 'react';
-
+  CommunicationUserIdentifier,
+  AzureCommunicationTokenCredential,
+} from "@azure/communication-common";
+import {
+  CallAdapter,
+  CallAdapterLocator,
+  CallComposite,
+  useAzureCommunicationCallAdapter,
+} from "@azure/communication-react";
+import { Spinner, Stack } from "@fluentui/react";
+import React, { useMemo } from "react";
 
 export const NewWindowCallScreen = (props: {
   adapterArgs: {
@@ -48,13 +52,12 @@ export const NewWindowCallScreen = (props: {
     adapterArgs.alternateCallerId,
   ]);
 
-
   const afterCreate = (adapter: CallAdapter): Promise<CallAdapter> => {
     adapter.on("callEnded", () => {
       window.close();
     });
-    adapter.joinCall({cameraOn: false, microphoneOn: true});
-    return new Promise((resolve, reject) => resolve(adapter));
+    adapter.joinCall({ cameraOn: false, microphoneOn: true });
+    return new Promise((resolve) => resolve(adapter));
   };
 
   const adapter = useAzureCommunicationCallAdapter(args, afterCreate);
@@ -84,7 +87,7 @@ export const NewWindowCallScreen = (props: {
             peopleButton: false,
             displayType: "compact",
           },
-          localVideoTile: useVideo ? {position: 'floating'} : false
+          localVideoTile: useVideo ? { position: "floating" } : false,
         }}
         adapter={adapter}
       />
