@@ -1,4 +1,3 @@
-
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
@@ -13,7 +12,7 @@ import { v1 as generateGUID } from 'uuid';
  */
 export const getStartSessionFromURL = (): boolean | undefined => {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get("newSession") === "true";
+  return urlParams.get('newSession') === 'true';
 };
 
 /**
@@ -47,37 +46,36 @@ export const fetchTokenResponse = async (): Promise<any> => {
 
 /**
  * Get Teams Call Queue to make call with widget.
- * 
+ *
  * @returns Id of call queue as a string
  */
 export const fetchCallQueueId = async (): Promise<string> => {
-
   const getRequestOptions = {
     method: 'GET'
   };
   const response = await fetch('/getCallQueueId', getRequestOptions);
-  if(response.ok){
+  if (response.ok) {
     const retrieveCallQueueId = await response.text().then((callQueueId) => callQueueId);
-    if(retrieveCallQueueId) {
+    if (retrieveCallQueueId) {
       return retrieveCallQueueId;
     }
   }
   throw new Error('Invalid callQueueId Response');
-}
+};
 
 export const fetchAutoAttendantId = async (): Promise<string> => {
   const getRequestOptions = {
     method: 'GET'
   };
   const response = await fetch('/getAutoAttendantId', getRequestOptions);
-  if(response.ok){
+  if (response.ok) {
     const retrieveCallQueueId = await response.text().then((callQueueId) => callQueueId);
-    if(retrieveCallQueueId) {
+    if (retrieveCallQueueId) {
       return retrieveCallQueueId;
     }
   }
   throw new Error('Invalid callQueueId Response');
-}
+};
 
 /**
  * Generate a random user name.

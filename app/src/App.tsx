@@ -1,24 +1,22 @@
-
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
-import { CallAdapterLocator } from '@azure/communication-react';
 import './App.css';
-import { useEffect, useMemo, useState } from 'react';
-import { CommunicationIdentifier, CommunicationUserIdentifier } from '@azure/communication-common';
+import React, { useEffect, useMemo, useState } from 'react';
+import { CommunicationUserIdentifier } from '@azure/communication-common';
 import { Spinner, Stack, initializeIcons, registerIcons } from '@fluentui/react';
 import { CallAdd20Regular, Dismiss20Regular } from '@fluentui/react-icons';
 import { NewWindowCallScreen } from './views/NewWindowCallScreen';
 import { CallingWidgetScreen } from './views/CallingWidgetScreen';
 import { AdapterArgs, getStartSessionFromURL } from './utils/AppUtils';
 
-type AppPages = "calling-widget" | "new-window-call";
+type AppPages = 'calling-widget' | 'new-window-call';
 
 registerIcons({
-  icons: { dismiss: <Dismiss20Regular />, callAdd: <CallAdd20Regular /> },
+  icons: { dismiss: <Dismiss20Regular />, callAdd: <CallAdd20Regular /> }
 });
 initializeIcons();
-function App() {
-  const [page, setPage] = useState<AppPages>("calling-widget");
+function App(): JSX.Element {
+  const [page, setPage] = useState<AppPages>('calling-widget');
   const [adapterArgs, setAdapterArgs] = useState<AdapterArgs | undefined>();
   const [useVideo, setUseVideo] = useState<boolean>(false);
 
@@ -60,7 +58,6 @@ function App() {
     }
   }, [adapterArgs]);
 
-
   switch (page) {
     case 'calling-widget': {
       return <CallingWidgetScreen />;
@@ -68,10 +65,10 @@ function App() {
     case 'new-window-call': {
       if (!adapterArgs) {
         return (
-          <Stack verticalAlign='center' style={{ height: '100%', width: '100%' }}>
+          <Stack verticalAlign="center" style={{ height: '100%', width: '100%' }}>
             <Spinner label={'Getting user credentials from server'} ariaLive="assertive" labelPosition="top" />;
           </Stack>
-        )
+        );
       }
       return (
         <NewWindowCallScreen
