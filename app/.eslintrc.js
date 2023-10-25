@@ -15,7 +15,7 @@ module.exports = {
       'plugin:react-hooks/recommended'
     ],
     parser: '@typescript-eslint/parser',
-    plugins: ['@typescript-eslint', 'header'],
+    plugins: ['@typescript-eslint', 'header', 'prettier'],
     parserOptions: {
       ecmaFeatures: {
         jsx: true
@@ -29,6 +29,12 @@ module.exports = {
         {
           allowExpressions: true,
           allowTypedFunctionExpressions: true
+        }
+      ],
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "auto"
         }
       ],
       eqeqeq: 'warn',
