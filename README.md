@@ -1,6 +1,6 @@
 # Welcome to an Azure Communication Services Calling Widget Sample
 
-<img src='./media/Sample-app-splash.png' width='1000'>
+<img src='./media/sample-splash-home.png' width='1000'>
 
 This project is aimed to teach developers on how to create a Calling Widget using the Azure Communication UI Library.
 
@@ -13,20 +13,22 @@ If you want to just try it out follow the instructions below. If you are interes
 
 To just run the completed code, In the project directory, run:
 
-### `npm install`
+### `npm run setup`
 
 ### Swap placeholders for identifiers
-Go to the `src` folder and find the `App.tsx` file.
-There input values for the `token`, `userId` and `locator`.
+Go to the `server` folder and find the `appsettings.json` file.
+replace all values here for you Azure communication Services resouce and Teams voice apps.
 
 ### Run the application
 
 In the project directory, run:
 
-### `npm start`
+### `npm run start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+Your applications server will be running on [http://localhost:8080](http://localhost:8080)
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
