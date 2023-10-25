@@ -13,6 +13,7 @@ import {
 } from "../utils/AppUtils";
 
 export const CallingWidgetScreen = (): JSX.Element => {
+  /* eslint-disable @typescript-eslint/no-var-requires */
   const hero = require("../hero.svg") as string;
   const [userDisplayName, setUserDisplayName] = useState<string>();
   const newWindowRef = useRef<Window | null>(null);
