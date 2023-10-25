@@ -1,17 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
-import {
-  CommunicationUserIdentifier,
-  AzureCommunicationTokenCredential,
-} from "@azure/communication-common";
+import { CommunicationUserIdentifier, AzureCommunicationTokenCredential } from '@azure/communication-common';
 import {
   CallAdapter,
   CallAdapterLocator,
   CallComposite,
-  useAzureCommunicationCallAdapter,
-} from "@azure/communication-react";
-import { Spinner, Stack } from "@fluentui/react";
-import React, { useMemo } from "react";
+  useAzureCommunicationCallAdapter
+} from '@azure/communication-react';
+import { Spinner, Stack } from '@fluentui/react';
+import React, { useMemo } from 'react';
 
 export const NewWindowCallScreen = (props: {
   adapterArgs: {
@@ -29,7 +26,7 @@ export const NewWindowCallScreen = (props: {
     try {
       return new AzureCommunicationTokenCredential(adapterArgs.token);
     } catch {
-      console.error("Failed to construct token credential");
+      console.error('Failed to construct token credential');
       return undefined;
     }
   }, [adapterArgs.token]);
@@ -41,7 +38,7 @@ export const NewWindowCallScreen = (props: {
       credential,
       token: adapterArgs.token,
       locator: adapterArgs.locator,
-      alternateCallerId: adapterArgs.alternateCallerId,
+      alternateCallerId: adapterArgs.alternateCallerId
     };
   }, [
     adapterArgs.userId,
@@ -49,11 +46,11 @@ export const NewWindowCallScreen = (props: {
     credential,
     adapterArgs.token,
     adapterArgs.locator,
-    adapterArgs.alternateCallerId,
+    adapterArgs.alternateCallerId
   ]);
 
   const afterCreate = (adapter: CallAdapter): Promise<CallAdapter> => {
-    adapter.on("callEnded", () => {
+    adapter.on('callEnded', () => {
       window.close();
     });
     adapter.joinCall({ cameraOn: false, microphoneOn: true });
@@ -64,20 +61,13 @@ export const NewWindowCallScreen = (props: {
 
   if (!adapter) {
     return (
-      <Stack
-        verticalAlign="center"
-        styles={{ root: { height: "100vh", width: "100vw" } }}
-      >
-        <Spinner
-          label={"Creating adapter"}
-          ariaLive="assertive"
-          labelPosition="top"
-        />
+      <Stack verticalAlign="center" styles={{ root: { height: '100vh', width: '100vw' } }}>
+        <Spinner label={'Creating adapter'} ariaLive="assertive" labelPosition="top" />
       </Stack>
     );
   }
   return (
-    <Stack styles={{ root: { height: "100vh", width: "100vw" } }}>
+    <Stack styles={{ root: { height: '100vh', width: '100vw' } }}>
       <CallComposite
         options={{
           callControls: {
@@ -85,9 +75,9 @@ export const NewWindowCallScreen = (props: {
             screenShareButton: useVideo,
             moreButton: false,
             peopleButton: false,
-            displayType: "compact",
+            displayType: 'compact'
           },
-          localVideoTile: useVideo ? { position: "floating" } : false,
+          localVideoTile: useVideo ? { position: 'floating' } : false
         }}
         adapter={adapter}
       />
