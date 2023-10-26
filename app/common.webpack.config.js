@@ -4,6 +4,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const webpackConfig = (sampleAppDir, env, babelConfig) => {
   const config = {
@@ -38,6 +39,15 @@ const webpackConfig = (sampleAppDir, env, babelConfig) => {
     },
     plugins: [
       new HtmlWebpackPlugin({ template: './public/index.html' }),
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: path.resolve(sampleAppDir, './public/manifest.json'),
+            to: path.resolve(sampleAppDir, './dist/build')
+          },
+          { from: path.resolve(sampleAppDir, './public/favicon.ico'), to: path.resolve(sampleAppDir, './dist/build') }
+        ]
+      }),
       new webpack.DefinePlugin({
         'process.env.PRODUCTION': env.production || !env.development,
         'process.env.NAME': JSON.stringify(require(path.resolve(sampleAppDir, 'package.json')).name),
