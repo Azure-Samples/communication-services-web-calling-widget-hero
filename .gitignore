@@ -13,6 +13,7 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+
 # Mono auto generated files
 mono_crash.*
 
@@ -40,7 +41,8 @@ Calling/ClientApp/build
 
 # Visual Studio 2017 auto generated files
 Generated\ Files/
-
+# vs code 
+.vscode
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
@@ -351,9 +353,10 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-Calling/dist/
-Server/dist/server.js
-Calling/.vscode
-Calling/build/
-Server/.rush/temp/
-Server/.vscode/
+app/dist/
+server/dist/
+app/.vscode
+app/build/
+server/.rush/temp/
+server/.vscode/
+server/appsettings.json/
