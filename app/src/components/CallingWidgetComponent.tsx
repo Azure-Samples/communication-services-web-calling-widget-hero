@@ -22,7 +22,6 @@ import {
 import { useCallback, useMemo } from 'react';
 import { AdapterArgs } from '../utils/AppUtils';
 import { callingWidgetInCallContainerStyles } from '../styles/CallingWidgetComponent.styles';
-import { Console } from 'console';
 
 export interface CallingWidgetComponentProps {
   /**
@@ -98,7 +97,7 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
     });
 
     adapter.onStateChange((state: CallAdapterState) => {
-      if(state?.call?.id && callIdRef.current !== state?.call?.id) {
+      if (state?.call?.id && callIdRef.current !== state?.call?.id) {
         callIdRef.current = state?.call?.id;
         console.log(`Call Id: ${callIdRef.current}`);
       }
