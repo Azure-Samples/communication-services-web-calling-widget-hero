@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 import { IconButton, PrimaryButton, Stack, TextField, useTheme, Checkbox, Icon } from '@fluentui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   callingWidgetSetupContainerStyles,
   checkboxStyles,
@@ -16,11 +16,13 @@ import {
   CallAdapter,
   CallComposite,
   useAzureCommunicationCallAdapter,
-  AzureCommunicationCallAdapterArgs
+  AzureCommunicationCallAdapterArgs,
+  CallAdapterState
 } from '@azure/communication-react';
 import { useCallback, useMemo } from 'react';
 import { AdapterArgs } from '../utils/AppUtils';
 import { callingWidgetInCallContainerStyles } from '../styles/CallingWidgetComponent.styles';
+import { Console } from 'console';
 
 export interface CallingWidgetComponentProps {
   /**
@@ -61,6 +63,8 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
   const [consentToData, setConsentToData] = useState<boolean>(false);
   const [useLocalVideo, setUseLocalVideo] = useState<boolean>(false);
 
+  const callIdRef = useRef<string>();
+
   const theme = useTheme();
 
   useEffect(() => {
@@ -91,6 +95,13 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
     adapter.on('callEnded', () => {
       setDisplayName(undefined);
       setWidgetState('new');
+    });
+
+    adapter.onStateChange((state: CallAdapterState) => {
+      if(state?.call?.id && callIdRef.current !== state?.call?.id) {
+        callIdRef.current = state?.call?.id;
+        console.log(`Call Id: ${callIdRef.current}`);
+      }
     });
     return adapter;
   }, []);
