@@ -17,7 +17,8 @@ import {
   CallComposite,
   useAzureCommunicationCallAdapter,
   AzureCommunicationCallAdapterArgs,
-  CallAdapterState
+  CallAdapterState,
+  CommonCallAdapterOptions
 } from '@azure/communication-react';
 import { useCallback, useMemo } from 'react';
 import { AdapterArgs } from '../utils/AppUtils';
@@ -81,12 +82,21 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
     }
   }, [adapterArgs.token]);
 
+  const adapterOptions: CommonCallAdapterOptions = {
+    callingSounds: {
+      callEnded: { url: '/sounds/callEnded.mp3' },
+      callRinging: { url: '/sounds/callRinging.mp3' },
+      callBusy: { url: '/sounds/callBusy.mp3' }
+    }
+  };
+
   const callAdapterArgs = useMemo(() => {
     return {
       userId: adapterArgs.userId,
       credential: credential,
       locator: adapterArgs.locator,
-      displayName: displayName
+      displayName: displayName,
+      options: adapterOptions
     };
   }, [adapterArgs.locator, adapterArgs.userId, credential, displayName]);
 
