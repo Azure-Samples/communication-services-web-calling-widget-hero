@@ -82,13 +82,16 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
     }
   }, [adapterArgs.token]);
 
-  const adapterOptions: CommonCallAdapterOptions = {
-    callingSounds: {
-      callEnded: { url: '/sounds/callEnded.mp3' },
-      callRinging: { url: '/sounds/callRinging.mp3' },
-      callBusy: { url: '/sounds/callBusy.mp3' }
-    }
-  };
+  const adapterOptions: CommonCallAdapterOptions = useMemo(
+    () => ({
+      callingSounds: {
+        callEnded: { url: '/sounds/callEnded.mp3' },
+        callRinging: { url: '/sounds/callRinging.mp3' },
+        callBusy: { url: '/sounds/callBusy.mp3' }
+      }
+    }),
+    []
+  );
 
   const callAdapterArgs = useMemo(() => {
     return {
