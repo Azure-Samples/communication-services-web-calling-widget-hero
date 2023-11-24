@@ -50,7 +50,7 @@ const webpackConfig = (sampleAppDir, env, babelConfig) => {
             to: path.resolve(sampleAppDir, './dist/build')
           },
           { from: path.resolve(sampleAppDir, './public/favicon.ico'), to: path.resolve(sampleAppDir, './dist/build') },
-          { from: path.resolve(sampleAppDir, './public/sounds'), to: path.resolve(sampleAppDir, './dist/build/sounds')}
+          { from: path.resolve(sampleAppDir, './public/sounds'), to: path.resolve(sampleAppDir, './dist/build/sounds') }
         ]
       }),
       new webpack.DefinePlugin({
