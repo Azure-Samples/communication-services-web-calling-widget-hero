@@ -101,7 +101,7 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
       displayName: displayName,
       options: adapterOptions
     };
-  }, [adapterArgs.locator, adapterArgs.userId, credential, displayName]);
+  }, [adapterArgs.locator, adapterArgs.userId, credential, displayName, adapterOptions]);
 
   const afterCreate = useCallback(async (adapter: CallAdapter): Promise<CallAdapter> => {
     adapter.on('callEnded', () => {
