@@ -34,6 +34,10 @@ const webpackConfig = (sampleAppDir, env, babelConfig) => {
         {
           test: /\.svg/,
           type: 'asset/inline'
+        },
+        {
+          test: /\.mp3$/,
+          type: 'file-loader'
         }
       ]
     },
@@ -45,7 +49,8 @@ const webpackConfig = (sampleAppDir, env, babelConfig) => {
             from: path.resolve(sampleAppDir, './public/manifest.json'),
             to: path.resolve(sampleAppDir, './dist/build')
           },
-          { from: path.resolve(sampleAppDir, './public/favicon.ico'), to: path.resolve(sampleAppDir, './dist/build') }
+          { from: path.resolve(sampleAppDir, './public/favicon.ico'), to: path.resolve(sampleAppDir, './dist/build') },
+          { from: path.resolve(sampleAppDir, './public/sounds'), to: path.resolve(sampleAppDir, './dist/build/sounds') }
         ]
       }),
       new webpack.DefinePlugin({
