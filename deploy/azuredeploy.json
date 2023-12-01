@@ -68,7 +68,9 @@
           },
           "properties": {
             "ResourceConnectionString": "[listkeys(variables('commsName'), '2020-08-20' ).primaryConnectionString]",
-            "WEBSITE_NODE_DEFAULT_VERSION": "~18"
+            "WEBSITE_NODE_DEFAULT_VERSION": "~18",
+            "CallQueueId": "Please enter your CallQueueId",
+            "AutoAttendantId": "Please enter your AutoAttendantId"
           }
         },
         {
