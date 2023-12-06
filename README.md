@@ -1,4 +1,3 @@
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fcommunication-services-web-calling-widget-hero%2Fmain%2Fdeploy%2Fazuredeploy.json)
 
 # Welcome to an Azure Communication Services Calling Widget Sample
 
@@ -46,6 +45,40 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Deploying your Application
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fcommunication-services-web-calling-widget-hero%2Fmain%2Fdeploy%2Fazuredeploy.json)
+
+This repo supports our one click deployment tools. Interact with the button above to deploy our latest bundled release.
+
+### Actions after deployment
+
+Since this application is meant to interact with Teams Calling Applications we will need to do a few things following the completion of the deployment regarding your Azure Communication Services resource the app will use.
+
+<img src='./media/config-tutorial-screen.png' width='1000'>
+
+You have two different actions you can take when it comes to your `ResourceConnectionString`:
+- Federate the new Azure communication services resource with your teams tenant that is made as part of your deployment. Please see our [documentation](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-call-queue) on how to do that.
+- Replace the `ResourceConnectionString` value for the application in your [Azure Portal](https://ms.portal.azure.com/) with the connection string that is already federated with your desired Teams tenant.
+
+Next, you will need to replace in the Application settings the two Teams Calling Application placeholder values created by the deployment:
+- `AutoAttendantId`
+- `CallQueueId`
+
+Once these two values are replaced, your application is ready to use!
+
+## Deploying with Azure tools
+
+### Pre-requisites
+- An Azure Communication Services Resource [federated with a Teams tenant](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-call-queue)
+- An [Azure Application service](https://azure.microsoft.com/en-ca/products/app-service)
+
+This is a more involved process. First you will want to set up your `appsettings.json` in the `server` directory with your Azure Communication Services resource information, and your Teams Calling Application id's. Then you will need to run the following three commands:
+- `npm run setup` 
+- `npm run build`
+- `npm run package`
+
+Then you will use the [Azure tools extension](https://code.visualstudio.com/docs/azure/extensions) to deploy the `app/dist` folder to your existing Application service.
+
 
 **Trademarks** This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft trademarks or logos is subject to and must follow Microsoft’s Trademark & Brand Guidelines. Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship. Any use of third-party trademarks or logos are subject to those third-party’s policies.
