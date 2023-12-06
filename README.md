@@ -53,7 +53,7 @@ This repo supports our one click deployment tools. Interact with the button abov
 
 ### Actions after deployment
 
-Due to the nature of this application meant to interact with Teams Calling Applications we will need to do a few things following the completion of the deployment regarding your Azure Communication Services resource the app will use.
+Since this application is meant to interact with Teams Calling Applications we will need to do a few things following the completion of the deployment regarding your Azure Communication Services resource the app will use.
 
 <img src='./media/config-tutorial-screen.png' width='1000'>
 
@@ -61,11 +61,11 @@ You have two different actions you can take when it comes to your `ResourceConne
 - Federate the new Azure communication services resource with your teams tenant that is made as part of your deployment. Please see our [documentation](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-call-queue) on how to do that.
 - Replace the `ResourceConnectionString` value for the application in your [Azure Portal](https://ms.portal.azure.com/) with the connection string that is already federated with your desired Teams tenant.
 
-Next you will need to replace in the Application settings the two Teams Calling Application placeholder values created by the deployment:
+Next, you will need to replace in the Application settings the two Teams Calling Application placeholder values created by the deployment:
 - `AutoAttendantId`
 - `CallQueueId`
 
-Once these two values are replaced your application is ready to use!
+Once these two values are replaced, your application is ready to use!
 
 ## Deploying with Azure tools
 
