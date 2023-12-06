@@ -71,7 +71,7 @@ Once these two values are replaced your application is ready to use!
 
 ### Pre-requisites
 - An Azure Communication Services Resource [federated with a Teams tenant](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-call-queue)
-- An Azure Application service
+- An [Azure Application service](https://azure.microsoft.com/en-ca/products/app-service)
 
 This is a more involved process. First you will want to set up your `appsettings.json` in the `server` directory with your Azure Communication Services resource information, and your Teams Calling Application id's. Then you will need to run the following three commands:
 - `npm run setup` 
