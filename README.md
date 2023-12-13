@@ -1,6 +1,8 @@
 
 # Welcome to an Azure Communication Services Calling Widget Sample
 
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fcommunication-services-web-calling-widget-hero%2Fmain%2Fdeploy%2Fazuredeploy.json)
+
 <img src='./media/sample-splash-home.png' width='1000'>
 
 This project is aimed to teach developers on how to create a Calling Widget using the Azure Communication UI Library.
@@ -49,7 +51,7 @@ Your app is ready to be deployed!
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fcommunication-services-web-calling-widget-hero%2Fmain%2Fdeploy%2Fazuredeploy.json)
 
-This repo supports our one click deployment tools. Interact with the button above to deploy our latest bundled release.
+This repo supports our one click deployment tools. Interact with the button at the top of the README to deploy our latest bundled release.
 
 ### Actions after deployment
 
