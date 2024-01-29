@@ -10,6 +10,10 @@ This project is aimed to teach developers on how to create a Calling Widget usin
 Depending on your needs, you might need to create an experience for your customers to be able to get a hold of you with minimal setup on their part.
 Calling Widget is a tool that is meant for allowing instant interaction, whether that is reaching out to customer support, having a quick call with your financial advisor, or other customer facing teams. The goal of this sample is to help make you one click away from your customers.
 
+## ❤️ Feedback
+
+We appreciate your feedback and energy helping us improve our services. [If you've tried the service, please give us feedback through this survey](https://microsoft.qualtrics.com/jfe/form/SV_9WTOR2ItSo0oFee). 
+
 ## Try It Out
 
 To just run the completed code, In the project directory, run:
