@@ -2,7 +2,7 @@
 // Licensed under the MIT license.
 
 import { CallAdapterLocator } from '@azure/communication-react';
-import { CommunicationIdentifier } from '@azure/communication-common';
+import { CommunicationUserIdentifier } from '@azure/communication-common';
 import { GroupLocator, TeamsMeetingLinkLocator } from '@azure/communication-calling';
 import { v1 as generateGUID } from 'uuid';
 
@@ -20,7 +20,7 @@ export const getStartSessionFromURL = (): boolean | undefined => {
  */
 export type AdapterArgs = {
   token: string;
-  userId: CommunicationIdentifier;
+  userId: CommunicationUserIdentifier;
   locator: CallAdapterLocator;
   displayName?: string;
 };

@@ -15,12 +15,11 @@ import { AzureCommunicationTokenCredential } from '@azure/communication-common';
 import {
   CallAdapter,
   CallComposite,
-  useAzureCommunicationCallAdapter,
-  AzureCommunicationCallAdapterArgs,
   CallAdapterState,
-  CommonCallAdapterOptions
+  CommonCallAdapterOptions,
+  createAzureCommunicationCallAdapter
 } from '@azure/communication-react';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { AdapterArgs } from '../utils/AppUtils';
 import { callingWidgetInCallContainerStyles } from '../styles/CallingWidgetComponent.styles';
 
@@ -62,6 +61,7 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
   const [displayName, setDisplayName] = useState<string>();
   const [consentToData, setConsentToData] = useState<boolean>(false);
   const [useLocalVideo, setUseLocalVideo] = useState<boolean>(false);
+  const [adapter, setAdapter] = useState<CallAdapter>();
 
   const callIdRef = useRef<string>();
 
@@ -94,32 +94,35 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
   );
 
   const callAdapterArgs = useMemo(() => {
-    return {
-      userId: adapterArgs.userId,
-      credential: credential,
-      locator: adapterArgs.locator,
-      displayName: displayName,
-      options: adapterOptions
-    };
+    if (displayName && credential) {
+      return {
+        userId: adapterArgs.userId,
+        credential: credential,
+        locator: adapterArgs.locator,
+        displayName: displayName,
+        options: adapterOptions
+      };
+    }
+    return;
   }, [adapterArgs.locator, adapterArgs.userId, credential, displayName, adapterOptions]);
 
-  const afterCreate = useCallback(async (adapter: CallAdapter): Promise<CallAdapter> => {
-    adapter.on('callEnded', () => {
-      setDisplayName(undefined);
-      setWidgetState('new');
-    });
+  useEffect(() => {
+    if (adapter) {
+      adapter.on('callEnded', () => {
+        setDisplayName(undefined);
+        setWidgetState('new');
+      });
 
-    adapter.onStateChange((state: CallAdapterState) => {
-      if (state?.call?.id && callIdRef.current !== state?.call?.id) {
-        callIdRef.current = state?.call?.id;
-        console.log(`Call Id: ${callIdRef.current}`);
-      }
-    });
-    return adapter;
-  }, []);
+      adapter.onStateChange((state: CallAdapterState) => {
+        if (state?.call?.id && callIdRef.current !== state?.call?.id) {
+          callIdRef.current = state?.call?.id;
+          console.log(`Call Id: ${callIdRef.current}`);
+        }
+      });
+    }
+  }, [adapter]);
 
-  const adapter = useAzureCommunicationCallAdapter(callAdapterArgs as AzureCommunicationCallAdapterArgs, afterCreate);
-
+  console.log(adapter);
   /** widget template for when widget is open, put any fields here for user information desired */
   if (widgetState === 'setup' && onSetDisplayName && onSetUseVideo) {
     return (
@@ -127,7 +130,12 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
         <IconButton
           styles={collapseButtonStyles}
           iconProps={{ iconName: 'Dismiss' }}
-          onClick={() => setWidgetState('new')}
+          onClick={() => {
+            setDisplayName(undefined);
+            setConsentToData(false);
+            setUseLocalVideo(false);
+            setWidgetState('new');
+          }}
         />
         <Stack tokens={{ childrenGap: '1rem' }} styles={logoContainerStyles}>
           <Stack style={{ transform: 'scale(1.8)' }}>{onRenderLogo && onRenderLogo()}</Stack>
@@ -151,11 +159,23 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
         <Checkbox
           required={true}
           styles={checkboxStyles(theme)}
+          disabled={displayName === undefined}
           label={
             'By checking this box, you are consenting that we will collect data from the call for customer support reasons'
           }
-          onChange={(_, checked?: boolean | undefined) => {
+          onChange={async (_, checked?: boolean | undefined) => {
             setConsentToData(!!checked);
+            if (callAdapterArgs) {
+              setAdapter(
+                await createAzureCommunicationCallAdapter({
+                  displayName: callAdapterArgs.displayName ?? '',
+                  userId: callAdapterArgs.userId,
+                  credential: callAdapterArgs.credential,
+                  locator: callAdapterArgs.locator,
+                  options: callAdapterArgs.options
+                })
+              );
+            }
           }}
         ></Checkbox>
         <PrimaryButton
