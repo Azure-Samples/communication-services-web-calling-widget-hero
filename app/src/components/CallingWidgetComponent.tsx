@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
-import { IconButton, PrimaryButton, Stack, TextField, useTheme, Checkbox, Icon, ITextField } from '@fluentui/react';
+import { IconButton, PrimaryButton, Stack, TextField, useTheme, Checkbox, Icon } from '@fluentui/react';
 import React, { useEffect, useRef, useState } from 'react';
 import {
   callingWidgetSetupContainerStyles,
