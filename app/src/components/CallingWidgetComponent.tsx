@@ -145,7 +145,7 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
           required={true}
           placeholder={'Enter your name'}
           onChange={(_, newValue) => {
-            setDisplayName(newValue)
+            setDisplayName(newValue);
           }}
         />
         <Checkbox
@@ -166,13 +166,15 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
           onChange={async (_, checked?: boolean | undefined) => {
             setConsentToData(!!checked);
             if (callAdapterArgs) {
-              setAdapter(await createAzureCommunicationCallAdapter({
-                displayName: callAdapterArgs.displayName ?? '',
-                userId: callAdapterArgs.userId,
-                credential: callAdapterArgs.credential,
-                locator: callAdapterArgs.locator,
-                options: callAdapterArgs.options
-              }))
+              setAdapter(
+                await createAzureCommunicationCallAdapter({
+                  displayName: callAdapterArgs.displayName ?? '',
+                  userId: callAdapterArgs.userId,
+                  credential: callAdapterArgs.credential,
+                  locator: callAdapterArgs.locator,
+                  options: callAdapterArgs.options
+                })
+              );
             }
           }}
         ></Checkbox>
