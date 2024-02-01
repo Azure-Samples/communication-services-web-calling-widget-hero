@@ -190,9 +190,9 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
             }
           }}
         >
-          {!consentToData && ('Enter your name')}
-          {consentToData && !adapter && (<Spinner  ariaLive="assertive" labelPosition="top" />)} 
-          {consentToData && adapter && ('StartCall')}
+          {!consentToData && (`'Enter your name'`)}
+          {consentToData && !adapter && (<Spinner ariaLive="assertive" labelPosition="top" />)} 
+          {consentToData && adapter && (`'StartCall'`)}
         </PrimaryButton>
       </Stack>
     );
