@@ -116,6 +116,10 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
         adapter.dispose();
       });
 
+      adapter.on('transferRequested', (e) => {
+        e.accept();
+      })
+
       adapter.onStateChange((state: CallAdapterState) => {
         if (state?.call?.id && callIdRef.current !== state?.call?.id) {
           callIdRef.current = state?.call?.id;
