@@ -111,6 +111,9 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
       adapter.on('callEnded', () => {
         setDisplayName(undefined);
         setWidgetState('new');
+        setConsentToData(false);
+        setAdapter(undefined);
+        adapter.dispose();
       });
 
       adapter.onStateChange((state: CallAdapterState) => {
@@ -122,7 +125,6 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
     }
   }, [adapter]);
 
-  console.log(adapter);
   /** widget template for when widget is open, put any fields here for user information desired */
   if (widgetState === 'setup' && onSetDisplayName && onSetUseVideo) {
     return (
@@ -168,7 +170,7 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
             if (callAdapterArgs) {
               setAdapter(
                 await createAzureCommunicationCallAdapter({
-                  displayName: callAdapterArgs.displayName ?? '',
+                  displayName: displayName ?? '',
                   userId: callAdapterArgs.userId,
                   credential: callAdapterArgs.credential,
                   locator: callAdapterArgs.locator,
