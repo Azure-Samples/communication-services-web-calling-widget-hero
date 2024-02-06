@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
-import { IconButton, PrimaryButton, Stack, TextField, useTheme, Checkbox, Icon } from '@fluentui/react';
+import { IconButton, PrimaryButton, Stack, TextField, useTheme, Checkbox, Icon, Spinner } from '@fluentui/react';
 import React, { useEffect, useRef, useState } from 'react';
 import {
   callingWidgetSetupContainerStyles,
@@ -190,7 +190,9 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
             }
           }}
         >
-          StartCall
+          {!consentToData && `Enter your name`}
+          {consentToData && !adapter && <Spinner ariaLive="assertive" labelPosition="top" />}
+          {consentToData && adapter && `StartCall`}
         </PrimaryButton>
       </Stack>
     );
