@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-import { CallAdapterLocator } from '@azure/communication-react';
+import { StartCallIdentifier } from '@azure/communication-react';
 import { CommunicationUserIdentifier } from '@azure/communication-common';
 import { GroupLocator, TeamsMeetingLinkLocator } from '@azure/communication-calling';
 import { v1 as generateGUID } from 'uuid';
@@ -21,7 +21,7 @@ export const getStartSessionFromURL = (): boolean | undefined => {
 export type AdapterArgs = {
   token: string;
   userId: CommunicationUserIdentifier;
-  locator: CallAdapterLocator;
+  targetCallees: StartCallIdentifier[];
   displayName?: string;
 };
 

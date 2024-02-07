@@ -3,8 +3,8 @@
 import { CommunicationUserIdentifier, AzureCommunicationTokenCredential } from '@azure/communication-common';
 import {
   CallAdapter,
-  CallAdapterLocator,
   CallComposite,
+  StartCallIdentifier,
   useAzureCommunicationCallAdapter
 } from '@azure/communication-react';
 import { Spinner, Stack } from '@fluentui/react';
@@ -15,7 +15,7 @@ export const NewWindowCallScreen = (props: {
     userId: CommunicationUserIdentifier;
     displayName: string;
     token: string;
-    locator: CallAdapterLocator;
+    targetCallees: StartCallIdentifier[];
     alternateCallerId?: string;
   };
   useVideo: boolean;
@@ -37,7 +37,7 @@ export const NewWindowCallScreen = (props: {
       displayName: adapterArgs.displayName,
       credential,
       token: adapterArgs.token,
-      locator: adapterArgs.locator,
+      locator: adapterArgs.targetCallees,
       alternateCallerId: adapterArgs.alternateCallerId
     };
   }, [
@@ -45,7 +45,7 @@ export const NewWindowCallScreen = (props: {
     adapterArgs.displayName,
     credential,
     adapterArgs.token,
-    adapterArgs.locator,
+    adapterArgs.targetCallees,
     adapterArgs.alternateCallerId
   ]);
 

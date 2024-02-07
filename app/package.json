@@ -7,7 +7,7 @@
         "@azure/communication-calling-effects": "1.0.1",
         "@azure/communication-chat": "1.5.0-beta.1",
         "@azure/communication-common": "2.3.0",
-        "@azure/communication-react": "1.12.1-alpha-202401280013",
+        "@azure/communication-react": "1.13.0-alpha-202402070012",
         "@babel/preset-react": "^7.12.7",
         "@fluentui/react": "~8.110.4",
         "@fluentui/react-hooks": "~8.6.12",
