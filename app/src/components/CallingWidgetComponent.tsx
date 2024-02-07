@@ -195,7 +195,7 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
               onRenderStartCall();
             } else if (displayName && consentToData && adapter && targetCallees) {
               setWidgetState('inCall');
-              adapter?.startCall( targetCallees ,{ audioOptions: {muted: false} });
+              adapter?.startCall( targetCallees, { audioOptions: {muted: false} });
             }
           }}
         >
