@@ -97,7 +97,7 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
 
   const callAdapterArgs = useMemo(() => {
     if (displayName && credential) {
-      setTargetCallees(adapterArgs.targetCallees)
+      setTargetCallees(adapterArgs.targetCallees);
       return {
         userId: adapterArgs.userId,
         credential: credential,
@@ -190,12 +190,12 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
         <PrimaryButton
           styles={startCallButtonStyles(theme)}
           onClick={() => {
-            if (displayName && consentToData && onRenderStartCall ) {
+            if (displayName && consentToData && onRenderStartCall) {
               onSetDisplayName(displayName);
               onRenderStartCall();
             } else if (displayName && consentToData && adapter && targetCallees) {
               setWidgetState('inCall');
-              adapter?.startCall( targetCallees, { audioOptions: {muted: false} });
+              adapter?.startCall(targetCallees, { audioOptions: { muted: false } });
             }
           }}
         >
