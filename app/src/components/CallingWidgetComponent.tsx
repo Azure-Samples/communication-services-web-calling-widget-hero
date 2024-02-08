@@ -17,7 +17,8 @@ import {
   CallComposite,
   CallAdapterState,
   CommonCallAdapterOptions,
-  createAzureCommunicationCallAdapter
+  createAzureCommunicationCallAdapter,
+  StartCallIdentifier
 } from '@azure/communication-react';
 import { useMemo } from 'react';
 import { AdapterArgs } from '../utils/AppUtils';
@@ -61,6 +62,7 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
   const [displayName, setDisplayName] = useState<string>();
   const [consentToData, setConsentToData] = useState<boolean>(false);
   const [useLocalVideo, setUseLocalVideo] = useState<boolean>(false);
+  const [targetCallees, setTargetCallees] = useState<StartCallIdentifier[]>();
   const [adapter, setAdapter] = useState<CallAdapter>();
 
   const callIdRef = useRef<string>();
@@ -95,16 +97,17 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
 
   const callAdapterArgs = useMemo(() => {
     if (displayName && credential) {
+      setTargetCallees(adapterArgs.targetCallees);
       return {
         userId: adapterArgs.userId,
         credential: credential,
-        locator: adapterArgs.locator,
+        targetCallees: adapterArgs.targetCallees,
         displayName: displayName,
         options: adapterOptions
       };
     }
     return;
-  }, [adapterArgs.locator, adapterArgs.userId, credential, displayName, adapterOptions]);
+  }, [adapterArgs.targetCallees, adapterArgs.userId, credential, displayName, adapterOptions]);
 
   useEffect(() => {
     if (adapter) {
@@ -114,6 +117,10 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
         setConsentToData(false);
         setAdapter(undefined);
         adapter.dispose();
+      });
+
+      adapter.on('transferRequested', (e) => {
+        e.accept();
       });
 
       adapter.onStateChange((state: CallAdapterState) => {
@@ -173,7 +180,7 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
                   displayName: displayName ?? '',
                   userId: callAdapterArgs.userId,
                   credential: callAdapterArgs.credential,
-                  locator: callAdapterArgs.locator,
+                  targetCallees: callAdapterArgs.targetCallees,
                   options: callAdapterArgs.options
                 })
               );
@@ -186,9 +193,9 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
             if (displayName && consentToData && onRenderStartCall) {
               onSetDisplayName(displayName);
               onRenderStartCall();
-            } else if (displayName && consentToData && adapter) {
+            } else if (displayName && consentToData && adapter && targetCallees) {
               setWidgetState('inCall');
-              adapter?.joinCall({ cameraOn: false, microphoneOn: true });
+              adapter?.startCall(targetCallees, { audioOptions: { muted: false } });
             }
           }}
         >

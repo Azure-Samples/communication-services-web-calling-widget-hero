@@ -4,7 +4,7 @@ import { CommunicationUserIdentifier } from '@azure/communication-common';
 import { CompoundButton, Spinner, Stack, Text } from '@fluentui/react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { CallingWidgetComponent } from '../components/CallingWidgetComponent';
-import { CallAdapterLocator } from '@azure/communication-react';
+import { StartCallIdentifier, fromFlatCommunicationIdentifier } from '@azure/communication-react';
 import { useRef } from 'react';
 import { fetchAutoAttendantId, fetchCallQueueId, fetchTokenResponse } from '../utils/AppUtils';
 
@@ -20,7 +20,7 @@ export const CallingWidgetScreen = (): JSX.Element => {
   const [callQueueId, setCallQueueId] = useState<string>();
   const [autoAttendantId, setAutoAttendantId] = useState<string>();
   const [currentLocator, setCurrentLocator] = useState<'queue' | 'attendant'>('queue');
-  const [callLocator, setCallLocator] = useState<CallAdapterLocator>();
+  const [targetCallees, setTargetCallees] = useState<StartCallIdentifier[]>();
   const [userCredentialFetchError, setUserCredentialFetchError] = useState<boolean>(false);
 
   // Get Azure Communications Service token and Voice app identification from the server.
@@ -37,7 +37,7 @@ export const CallingWidgetScreen = (): JSX.Element => {
         setUserToken(token);
         setUserIdentifier(user);
 
-        setCallLocator({ participantIds: [`28:orgid:${responseCallQueueId}`] });
+        setTargetCallees([fromFlatCommunicationIdentifier(`28:orgid:${responseCallQueueId}`)]);
       } catch (e) {
         console.error(e);
         setUserCredentialFetchError(true);
@@ -65,14 +65,14 @@ export const CallingWidgetScreen = (): JSX.Element => {
           userId: userIdentifier,
           displayName: userDisplayName,
           token: userToken,
-          locator: callLocator,
+          targetCallees: targetCallees,
           useVideo: useVideo
         };
         console.log(data);
         newWindowRef.current?.postMessage(data, window.origin);
       }
     });
-  }, [userIdentifier, userToken, callLocator, userDisplayName, useVideo]);
+  }, [userIdentifier, userToken, targetCallees, userDisplayName, useVideo]);
 
   if (userCredentialFetchError) {
     return (
@@ -110,7 +110,7 @@ export const CallingWidgetScreen = (): JSX.Element => {
             secondaryText={'Select for Call Queue'}
             onClick={() => {
               if (callQueueId) {
-                setCallLocator({ participantIds: [callQueueId] });
+                setTargetCallees([fromFlatCommunicationIdentifier(callQueueId)]);
                 setCurrentLocator('queue');
                 return;
               }
@@ -124,7 +124,7 @@ export const CallingWidgetScreen = (): JSX.Element => {
             secondaryText={'Select for Auto Attendant'}
             onClick={() => {
               if (autoAttendantId) {
-                setCallLocator({ participantIds: [autoAttendantId] });
+                setTargetCallees([fromFlatCommunicationIdentifier(autoAttendantId)]);
                 setCurrentLocator('attendant');
                 return;
               }
@@ -136,10 +136,10 @@ export const CallingWidgetScreen = (): JSX.Element => {
         </Stack>
       </Stack>
       <Stack horizontal tokens={{ childrenGap: '1.5rem' }} style={{ overflow: 'hidden', margin: 'auto' }}>
-        {userToken && userIdentifier && callLocator && (
+        {userToken && userIdentifier && targetCallees && (
           <CallingWidgetComponent
             adapterArgs={{
-              locator: callLocator,
+              targetCallees: targetCallees,
               token: userToken,
               userId: userIdentifier,
               displayName: userDisplayName
