@@ -109,6 +109,15 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
   useEffect(() => {
     if (adapter) {
       adapter.on('callEnded', () => {
+        /**
+         * We only want to reset the widget state if the call that ended is the same as the current call.
+         */
+        if (
+          adapter.getState().acceptedTransferCallState &&
+          adapter.getState().acceptedTransferCallState?.id !== callIdRef.current
+        ) {
+          return;
+        }
         setDisplayName(undefined);
         setWidgetState('new');
         setConsentToData(false);

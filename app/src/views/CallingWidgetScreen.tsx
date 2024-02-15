@@ -37,7 +37,7 @@ export const CallingWidgetScreen = (): JSX.Element => {
         setUserToken(token);
         setUserIdentifier(user);
 
-        setCallLocator({ participantIds: [`28:orgid:${responseCallQueueId}`] });
+        setTargetCallees([fromFlatCommunicationIdentifier(`28:orgid:${responseCallQueueId}`) as StartCallIdentifier]);
       } catch (e) {
         console.error(e);
         setUserCredentialFetchError(true);
@@ -110,7 +110,7 @@ export const CallingWidgetScreen = (): JSX.Element => {
             secondaryText={'Select for Call Queue'}
             onClick={() => {
               if (callQueueId) {
-                setCallLocator({ participantIds: [callQueueId] });
+                setTargetCallees([fromFlatCommunicationIdentifier(callQueueId) as StartCallIdentifier]);
                 setCurrentLocator('queue');
                 return;
               }
@@ -124,7 +124,7 @@ export const CallingWidgetScreen = (): JSX.Element => {
             secondaryText={'Select for Auto Attendant'}
             onClick={() => {
               if (autoAttendantId) {
-                setCallLocator({ participantIds: [autoAttendantId] });
+                setTargetCallees([fromFlatCommunicationIdentifier(autoAttendantId) as StartCallIdentifier]);
                 setCurrentLocator('attendant');
                 return;
               }
