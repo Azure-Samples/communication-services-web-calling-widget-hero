@@ -35,7 +35,7 @@ function App(): JSX.Element {
           userId: (event.data as AdapterArgs).userId as CommunicationUserIdentifier,
           displayName: (event.data as AdapterArgs).displayName,
           token: (event.data as AdapterArgs).token,
-          locator: (event.data as AdapterArgs).locator
+          targetCallees: (event.data as AdapterArgs).targetCallees
         });
         setUseVideo(!!event.data.useVideo);
       }
@@ -76,7 +76,7 @@ function App(): JSX.Element {
             userId: adapterArgs.userId as CommunicationUserIdentifier,
             displayName: adapterArgs.displayName ?? '',
             token: adapterArgs.token,
-            locator: adapterArgs.locator
+            targetCallees: adapterArgs.targetCallees
           }}
           useVideo={useVideo}
         />
