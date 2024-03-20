@@ -125,6 +125,8 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
         setWidgetState('new');
         setConsentToData(false);
         setAdapter(undefined);
+        setUseLocalVideo(false);
+        onSetUseVideo && onSetUseVideo(false);
         adapter.dispose();
       });
 
@@ -223,6 +225,7 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
               screenShareButton: useLocalVideo,
               moreButton: false,
               peopleButton: false,
+              raiseHandButton: false,
               displayType: 'compact'
             },
             localVideoTile: !useLocalVideo ? false : { position: 'floating' }
