@@ -137,7 +137,7 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
         }
       });
     }
-  }, [adapter]);
+  }, [adapter, onSetUseVideo]);
 
   /** widget template for when widget is open, put any fields here for user information desired */
   if (widgetState === 'setup' && onSetDisplayName && onSetUseVideo) {
