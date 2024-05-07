@@ -127,7 +127,8 @@ export const CallingWidgetScreen = (): JSX.Element => {
                 style={{
                   height: '4rem',
                   width: '4rem',
-                  margin: 'auto'
+                  margin: 'auto',
+                  // filter: 'invert(27%) sepia(61%) saturate(5372%) hue-rotate(49deg) brightness(93%) contrast(101%)'
                 }}
                 src={hero}
                 alt="logo"
