@@ -11,7 +11,7 @@ import { solarTheme } from '../styles/CallingWidgetComponent.styles';
 
 export const CallingWidgetScreen = (): JSX.Element => {
   /* eslint-disable @typescript-eslint/no-var-requires */
-  const hero = require('../assets/images/icon_conversation.svg') as string;
+  const hero = require('../assets/images/clippy.jpg') as string;
   const [userDisplayName, setUserDisplayName] = useState<string>();
   const newWindowRef = useRef<Window | null>(null);
   const [useVideo, setUseVideo] = useState<boolean>(false);
@@ -127,8 +127,7 @@ export const CallingWidgetScreen = (): JSX.Element => {
                 style={{
                   height: '4rem',
                   width: '4rem',
-                  margin: 'auto',
-                  filter: 'invert(27%) sepia(61%) saturate(5372%) hue-rotate(49deg) brightness(93%) contrast(101%)'
+                  margin: 'auto'
                 }}
                 src={hero}
                 alt="logo"
