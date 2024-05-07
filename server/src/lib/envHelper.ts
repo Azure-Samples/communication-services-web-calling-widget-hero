@@ -32,12 +32,10 @@ export const getCallQueueId = (): string => {
   console.log(appSettings);
 
     const id = process.env['CallQueueId'] || appSettings.CallQueueId;
-    console.log(id);
     return `${id}`;
 }
 
 export const getAutoAttendantId = (): string => {
     const id = process.env['AutoAttendantId'] || appSettings.AutoAttendantId;
-    console.log(id);
     return `${id}`;
 }

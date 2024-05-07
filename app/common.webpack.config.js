@@ -32,8 +32,9 @@ const webpackConfig = (sampleAppDir, env, babelConfig) => {
           use: ['style-loader', 'css-loader']
         },
         {
-          test: /\.svg/,
-          type: 'asset/inline'
+          test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+          // More information here https://webpack.js.org/guides/asset-modules/
+          type: 'asset'
         },
         {
           test: /\.mp3$/,
@@ -50,7 +51,10 @@ const webpackConfig = (sampleAppDir, env, babelConfig) => {
             to: path.resolve(sampleAppDir, './dist/build')
           },
           { from: path.resolve(sampleAppDir, './public/favicon.ico'), to: path.resolve(sampleAppDir, './dist/build') },
-          { from: path.resolve(sampleAppDir, './public/sounds'), to: path.resolve(sampleAppDir, './dist/build/sounds') }
+          {
+            from: path.resolve(sampleAppDir, './public/sounds'),
+            to: path.resolve(sampleAppDir, './dist/build/sounds')
+          }
         ]
       }),
       new webpack.DefinePlugin({

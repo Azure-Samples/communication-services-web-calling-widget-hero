@@ -4,13 +4,14 @@ import { CommunicationUserIdentifier } from '@azure/communication-common';
 import { CompoundButton, Spinner, Stack, Text } from '@fluentui/react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { CallingWidgetComponent } from '../components/CallingWidgetComponent';
-import { StartCallIdentifier, fromFlatCommunicationIdentifier } from '@azure/communication-react';
+import { FluentThemeProvider, StartCallIdentifier, fromFlatCommunicationIdentifier } from '@azure/communication-react';
 import { useRef } from 'react';
 import { fetchAutoAttendantId, fetchCallQueueId, fetchTokenResponse } from '../utils/AppUtils';
+import { solarTheme } from '../styles/CallingWidgetComponent.styles';
 
 export const CallingWidgetScreen = (): JSX.Element => {
   /* eslint-disable @typescript-eslint/no-var-requires */
-  const hero = require('../hero.svg') as string;
+  const hero = require('../assets/images/icon_conversation.svg') as string;
   const [userDisplayName, setUserDisplayName] = useState<string>();
   const newWindowRef = useRef<Window | null>(null);
   const [useVideo, setUseVideo] = useState<boolean>(false);
@@ -83,75 +84,61 @@ export const CallingWidgetScreen = (): JSX.Element => {
   }
 
   return (
-    <Stack style={{ height: '100%', width: '100%', padding: '3rem' }} tokens={{ childrenGap: '1.5rem' }}>
-      <Stack style={{ margin: 'auto' }} tokens={{ childrenGap: '1rem' }}>
-        <Stack style={{ padding: '3rem' }} horizontal tokens={{ childrenGap: '2rem' }}>
-          <Text style={{ marginTop: 'auto' }} variant="xLarge">
-            Welcome to a Calling Widget and Teams Voice Application sample
-          </Text>
-          <img style={{ width: '7rem', height: 'auto' }} src={hero} alt="logo" />
-        </Stack>
-
-        <Text>Sample has the ability to:</Text>
-        <ul>
-          <li>Make calls to Teams voice applications like Call Queues and Auto Attendants.</li>
-          <li>
-            Adhoc call Teams users with a tenant set that allows for calls from your Azure Communication Services
-            resource.
-          </li>
-        </ul>
-        <Text>
-          Make the selection to which Teams voice application you would like to call with the buttons below. Then use
-          the widget in the corner to start your call!
-        </Text>
-        <Stack tokens={{ childrenGap: '1rem' }}>
-          <CompoundButton
-            primary={currentLocator === 'queue' ? true : false}
-            secondaryText={'Select for Call Queue'}
-            onClick={() => {
-              if (callQueueId) {
-                setTargetCallees([fromFlatCommunicationIdentifier(callQueueId) as StartCallIdentifier]);
-                setCurrentLocator('queue');
-                return;
-              }
-              console.warn('No Call Queue id found.');
-            }}
-          >
-            Call Queue
-          </CompoundButton>
-          <CompoundButton
-            primary={currentLocator === 'attendant' ? true : false}
-            secondaryText={'Select for Auto Attendant'}
-            onClick={() => {
-              if (autoAttendantId) {
-                setTargetCallees([fromFlatCommunicationIdentifier(autoAttendantId) as StartCallIdentifier]);
-                setCurrentLocator('attendant');
-                return;
-              }
-              console.warn('No Auto Attendant id found.');
-            }}
-          >
-            Auto Attendant
-          </CompoundButton>
-        </Stack>
-      </Stack>
-      <Stack horizontal tokens={{ childrenGap: '1.5rem' }} style={{ overflow: 'hidden', margin: 'auto' }}>
-        {userToken && userIdentifier && targetCallees && (
-          <CallingWidgetComponent
-            adapterArgs={{
-              targetCallees: targetCallees,
-              token: userToken,
-              userId: userIdentifier,
-              displayName: userDisplayName
-            }}
-            onRenderLogo={() => {
-              return <img style={{ height: '4rem', width: '4rem', margin: 'auto' }} src={hero} alt="logo" />;
-            }}
-            onSetDisplayName={setUserDisplayName}
-            onSetUseVideo={setUseVideo}
-          />
-        )}
-      </Stack>
-    </Stack>
+      <div className="home-container">
+      <nav>
+        <div className="logo">
+          <b>Contoso</b> Energy
+        </div>
+        <div className="menu-items">
+          <a href="#">Menu</a>
+          <a href="#">Pay Bill</a>
+          <a href="#">Outages</a>
+          <a href="#">Support</a>
+          <a href="#" className="search">
+            Search
+          </a>
+        </div>
+        <div className="right-items">
+          <a href="#" className="language">
+            English
+          </a>
+          <a href="#" className="account">
+            Account
+          </a>
+        </div>
+      </nav>
+      <div className="content">
+        <p className="title">Looking for ways to save? Try solar</p>
+        <hr />
+        <p className="subtitle">You may qualify for tax savings and other benefits.</p>
+        <p className="subtitle">Chat with customer support to learn more</p>
+      </div>
+      {userToken && userIdentifier && targetCallees && (
+        <CallingWidgetComponent
+          adapterArgs={{
+            targetCallees: targetCallees,
+            token: userToken,
+            userId: userIdentifier,
+            displayName: userDisplayName
+          }}
+          onRenderLogo={() => {
+            return (
+              <img
+                style={{
+                  height: '4rem',
+                  width: '4rem',
+                  margin: 'auto',
+                  filter: 'invert(27%) sepia(61%) saturate(5372%) hue-rotate(49deg) brightness(93%) contrast(101%)'
+                }}
+                src={hero}
+                alt="logo"
+              />
+            );
+          }}
+          onSetDisplayName={setUserDisplayName}
+          onSetUseVideo={setUseVideo}
+        />
+      )}
+    </div>    
   );
 };

@@ -9,7 +9,9 @@ import {
   callingWidgetContainerStyles,
   callIconStyles,
   logoContainerStyles,
-  collapseButtonStyles
+  collapseButtonStyles,
+  callingWidgetWaitingContainerStyles,
+  solarTheme
 } from '../styles/CallingWidgetComponent.styles';
 import { AzureCommunicationTokenCredential } from '@azure/communication-common';
 import {
@@ -18,7 +20,8 @@ import {
   CallAdapterState,
   CommonCallAdapterOptions,
   createAzureCommunicationCallAdapter,
-  StartCallIdentifier
+  StartCallIdentifier,
+  FluentThemeProvider
 } from '@azure/communication-react';
 import { useMemo } from 'react';
 import { AdapterArgs } from '../utils/AppUtils';
@@ -67,7 +70,7 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
 
   const callIdRef = useRef<string>();
 
-  const theme = useTheme();
+  const theme = solarTheme;
 
   useEffect(() => {
     if (widgetState === 'new' && onSetUseVideo) {
@@ -142,75 +145,77 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
   /** widget template for when widget is open, put any fields here for user information desired */
   if (widgetState === 'setup' && onSetDisplayName && onSetUseVideo) {
     return (
-      <Stack styles={callingWidgetSetupContainerStyles(theme)} tokens={{ childrenGap: '1rem' }}>
-        <IconButton
-          styles={collapseButtonStyles}
-          iconProps={{ iconName: 'Dismiss' }}
-          onClick={() => {
-            setDisplayName(undefined);
-            setConsentToData(false);
-            setUseLocalVideo(false);
-            setWidgetState('new');
-          }}
-        />
-        <Stack tokens={{ childrenGap: '1rem' }} styles={logoContainerStyles}>
-          <Stack style={{ transform: 'scale(1.8)' }}>{onRenderLogo && onRenderLogo()}</Stack>
+      <FluentThemeProvider fluentTheme={theme}>
+        <Stack styles={callingWidgetSetupContainerStyles(theme)} tokens={{ childrenGap: '1rem' }}>
+          <IconButton
+            styles={collapseButtonStyles}
+            iconProps={{ iconName: 'Dismiss', style: { color: '#00894F' } }}
+            onClick={() => {
+              setDisplayName(undefined);
+              setConsentToData(false);
+              setUseLocalVideo(false);
+              setWidgetState('new');
+            }}
+          />
+          <Stack tokens={{ childrenGap: '1rem' }} styles={logoContainerStyles}>
+            <Stack style={{ transform: 'scale(1.8)' }}>{onRenderLogo && onRenderLogo()}</Stack>
+          </Stack>
+          <TextField
+            label={'Name'}
+            required={true}
+            placeholder={'Enter your name'}
+            onChange={(_, newValue) => {
+              setDisplayName(newValue);
+            }}
+          />
+          <Checkbox
+            styles={checkboxStyles(theme, useLocalVideo, false)}
+            label={'Use video - Checking this box will enable camera controls and screen sharing'}
+            onChange={(_, checked?: boolean | undefined) => {
+              onSetUseVideo(!!checked);
+              setUseLocalVideo(!useLocalVideo);
+            }}
+          ></Checkbox>
+          <Checkbox
+            required={true}
+            styles={checkboxStyles(theme, consentToData, displayName === undefined)}
+            disabled={displayName === undefined}
+            label={
+              'By checking this box, you are consenting that we will collect data from the call for customer support reasons'
+            }
+            onChange={async (_, checked?: boolean | undefined) => {
+              setConsentToData(!!checked);
+              if (callAdapterArgs) {
+                setAdapter(
+                  await createAzureCommunicationCallAdapter({
+                    displayName: displayName ?? '',
+                    userId: callAdapterArgs.userId,
+                    credential: callAdapterArgs.credential,
+                    targetCallees: callAdapterArgs.targetCallees,
+                    options: callAdapterArgs.options
+                  })
+                );
+              }
+            }}
+          ></Checkbox>
+          <PrimaryButton
+            styles={startCallButtonStyles(theme)}
+            onClick={() => {
+              if (displayName && consentToData && onRenderStartCall) {
+                onSetDisplayName(displayName);
+                onRenderStartCall();
+              } else if (displayName && consentToData && adapter && targetCallees) {
+                setWidgetState('inCall');
+                adapter?.startCall(targetCallees, { audioOptions: { muted: false } });
+              }
+            }}
+          >
+            {!consentToData && `Enter your name`}
+            {consentToData && !adapter && <Spinner ariaLive="assertive" labelPosition="top" />}
+            {consentToData && adapter && `StartCall`}
+          </PrimaryButton>
         </Stack>
-        <TextField
-          label={'Name'}
-          required={true}
-          placeholder={'Enter your name'}
-          onChange={(_, newValue) => {
-            setDisplayName(newValue);
-          }}
-        />
-        <Checkbox
-          styles={checkboxStyles(theme)}
-          label={'Use video - Checking this box will enable camera controls and screen sharing'}
-          onChange={(_, checked?: boolean | undefined) => {
-            onSetUseVideo(!!checked);
-            setUseLocalVideo(true);
-          }}
-        ></Checkbox>
-        <Checkbox
-          required={true}
-          styles={checkboxStyles(theme)}
-          disabled={displayName === undefined}
-          label={
-            'By checking this box, you are consenting that we will collect data from the call for customer support reasons'
-          }
-          onChange={async (_, checked?: boolean | undefined) => {
-            setConsentToData(!!checked);
-            if (callAdapterArgs) {
-              setAdapter(
-                await createAzureCommunicationCallAdapter({
-                  displayName: displayName ?? '',
-                  userId: callAdapterArgs.userId,
-                  credential: callAdapterArgs.credential,
-                  targetCallees: callAdapterArgs.targetCallees,
-                  options: callAdapterArgs.options
-                })
-              );
-            }
-          }}
-        ></Checkbox>
-        <PrimaryButton
-          styles={startCallButtonStyles(theme)}
-          onClick={() => {
-            if (displayName && consentToData && onRenderStartCall) {
-              onSetDisplayName(displayName);
-              onRenderStartCall();
-            } else if (displayName && consentToData && adapter && targetCallees) {
-              setWidgetState('inCall');
-              adapter?.startCall(targetCallees, { audioOptions: { muted: false } });
-            }
-          }}
-        >
-          {!consentToData && `Enter your name`}
-          {consentToData && !adapter && <Spinner ariaLive="assertive" labelPosition="top" />}
-          {consentToData && adapter && `StartCall`}
-        </PrimaryButton>
-      </Stack>
+      </FluentThemeProvider>
     );
   }
 
@@ -219,6 +224,7 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
       <Stack styles={callingWidgetInCallContainerStyles(theme)}>
         <CallComposite
           adapter={adapter}
+          fluentTheme={solarTheme}
           options={{
             callControls: {
               cameraButton: useLocalVideo,
@@ -244,16 +250,7 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
         setWidgetState('setup');
       }}
     >
-      <Stack
-        horizontalAlign="center"
-        verticalAlign="center"
-        style={{
-          height: '4rem',
-          width: '4rem',
-          borderRadius: '50%',
-          background: theme.palette.themePrimary
-        }}
-      >
+      <Stack horizontalAlign="center" verticalAlign="center" styles={callingWidgetWaitingContainerStyles(theme)}>
         <Icon iconName="callAdd" styles={callIconStyles(theme)} />
       </Stack>
     </Stack>

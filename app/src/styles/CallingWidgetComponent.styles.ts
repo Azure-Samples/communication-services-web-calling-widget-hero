@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
-// Licensed under the MIT license.
+// Licensed under the MIT License.
 
-import { IButtonStyles, ICheckboxStyles, IIconStyles, IStackStyles, Theme } from '@fluentui/react';
+import { IButtonStyles, ICheckboxStyles, IIconStyles, IStackStyles, Theme, createTheme } from '@fluentui/react';
 
-export const checkboxStyles = (theme: Theme): ICheckboxStyles => {
+export const checkboxStyles = (theme: Theme, checked: boolean, disabled: boolean): ICheckboxStyles => {
   return {
     label: {
       color: theme.palette.neutralPrimary
@@ -22,6 +22,7 @@ export const callingWidgetContainerStyles = (theme: Theme): IStackStyles => {
       bottom: '1rem',
       right: '1rem',
       position: 'absolute',
+      background: theme.palette.white,
       overflow: 'hidden',
       cursor: 'pointer',
       ':hover': {
@@ -109,3 +110,41 @@ export const callingWidgetInCallContainerStyles = (theme: Theme): IStackStyles =
     }
   };
 };
+
+export const callingWidgetWaitingContainerStyles = (theme: Theme): IStackStyles => {
+  return {
+    root: {
+      height: '4rem',
+      width: '4rem',
+      borderRadius: '50%',
+      background: theme.palette.themePrimary,
+    }
+  };
+};
+
+export const solarTheme = createTheme({
+  palette: {
+    themePrimary: '#04643c',
+    themeLighterAlt: '#eff9f5',
+    themeLighter: '#c3e6d7',
+    themeLight: '#94d0b7',
+    themeTertiary: '#45a27b',
+    themeSecondary: '#12764d',
+    themeDarkAlt: '#045a36',
+    themeDark: '#034c2d',
+    themeDarker: '#023821',
+    neutralLighterAlt: '#faf9f8',
+    neutralLighter: '#f3f2f1',
+    neutralLight: '#edebe9',
+    neutralQuaternaryAlt: '#e1dfdd',
+    neutralQuaternary: '#d0d0d0',
+    neutralTertiaryAlt: '#c8c6c4',
+    neutralTertiary: '#a19f9d',
+    neutralSecondary: '#605e5c',
+    neutralSecondaryAlt: '#8a8886',
+    neutralPrimaryAlt: '#3b3a39',
+    neutralPrimary: '#323130',
+    neutralDark: '#201f1e',
+    black: '#000000',
+    white: '#ffffff',
+  }});
