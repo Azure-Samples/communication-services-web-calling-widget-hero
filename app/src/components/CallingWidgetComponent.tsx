@@ -21,7 +21,11 @@ import {
   CommonCallAdapterOptions,
   createAzureCommunicationCallAdapter,
   StartCallIdentifier,
-  FluentThemeProvider
+  FluentThemeProvider,
+  OnFetchProfileCallback,
+  Profile,
+  AvatarPersonaDataCallback,
+  AvatarPersonaData
 } from '@azure/communication-react';
 import { useMemo } from 'react';
 import { AdapterArgs } from '../utils/AppUtils';
@@ -93,7 +97,8 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
         callEnded: { url: '/sounds/callEnded.mp3' },
         callRinging: { url: '/sounds/callRinging.mp3' },
         callBusy: { url: '/sounds/callBusy.mp3' }
-      }
+      },
+      onFetchProfile: onFetchProfile
     }),
     []
   );
@@ -225,12 +230,12 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
         <CallComposite
           adapter={adapter}
           fluentTheme={solarTheme}
+          onFetchAvatarPersonaData={onFetchAvatarPersonaData}
           options={{
             callControls: {
               cameraButton: useLocalVideo,
-              screenShareButton: useLocalVideo,
-              moreButton: false,
               peopleButton: false,
+              screenShareButton: false,
               raiseHandButton: false,
               displayType: 'compact'
             },
@@ -255,4 +260,21 @@ export const CallingWidgetComponent = (props: CallingWidgetComponentProps): JSX.
       </Stack>
     </Stack>
   );
+};
+
+const onFetchProfile: OnFetchProfileCallback = async (
+  userId: string,
+  defaultProfile?: Profile
+): Promise<Profile | undefined> => {
+  if (userId === '<Enter your teams voice app ID here>') {
+    return { displayName: 'Contoso Solar Call Queue' };
+  }
+  return undefined;
+};
+
+const onFetchAvatarPersonaData: AvatarPersonaDataCallback = async (userId: string): Promise<AvatarPersonaData> => {
+  if (userId === '<Enter your teams voice app ID here>') {
+    return { imageUrl: '/images/clippy.jpg' };
+  }
+  return {};
 };

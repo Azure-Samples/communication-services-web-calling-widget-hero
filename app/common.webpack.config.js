@@ -54,6 +54,10 @@ const webpackConfig = (sampleAppDir, env, babelConfig) => {
           {
             from: path.resolve(sampleAppDir, './public/sounds'),
             to: path.resolve(sampleAppDir, './dist/build/sounds')
+          },
+          {
+            from: path.resolve(sampleAppDir, './public/images'),
+            to: path.resolve(sampleAppDir, './dist/build/images')
           }
         ]
       }),
