@@ -96,8 +96,8 @@ export const collapseButtonStyles: IButtonStyles = {
 export const callingWidgetInCallContainerStyles = (theme: Theme): IStackStyles => {
   return {
     root: {
-      width: '37rem',
-      height: '37rem',
+      width: '80%',
+      height: '80%',
       padding: '0.5rem',
       boxShadow: theme.effects.elevation16,
       borderRadius: theme.effects.roundedCorner6,
