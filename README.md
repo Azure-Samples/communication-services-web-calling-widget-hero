@@ -1,20 +1,33 @@
 
 # Welcome to an Azure Communication Services Calling Widget Sample
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fcommunication-services-web-calling-widget-hero%2Fmain%2Fdeploy%2Fazuredeploy.json)
-
-<img src='./media/sample-splash-home.png' width='1000'>
-
 This project is aimed to teach developers on how to create a Calling Widget using the Azure Communication UI Library.
 
 Depending on your needs, you might need to create an experience for your customers to be able to get a hold of you with minimal setup on their part.
 Calling Widget is a tool that is meant for allowing instant interaction, whether that is reaching out to customer support, having a quick call with your financial advisor, or other customer facing teams. The goal of this sample is to help make you one click away from your customers.
 
+This sample is configured as a sample application for a solar company's support page and was showcased during Microsoft Build 2024
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fcommunication-services-web-calling-widget-hero%2Fmain%2Fdeploy%2Fazuredeploy.json)
+
+<img src='./media/build-sample-splash-home.png' width='600'>
+
+
 ## ❤️ Feedback
 
 We appreciate your feedback and energy helping us improve our services. [If you've tried the service, please give us feedback through this survey](https://microsoft.qualtrics.com/jfe/form/SV_9WTOR2ItSo0oFee). 
 
-## Try It Out
+# Try It Out
+
+## Pre-requisites
+These steps **need** to be completed before you can complete the whole experience. Reach out to your Teams administrator if you have questions about setting up the Teams Voice Applications.
+
+- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
+- [Node.js](https://nodejs.org/), Active LTS and Maintenance LTS versions [Node 18 LTS](https://nodejs.org/en) is recommended. Use the `node --version` command to check your version.
+- An Azure Communication Services resource. [Create a Communications Resource](../../quickstarts/create-communication-resource.md)
+- Complete the Teams tenant setup in [Teams Call Queues](../../quickstarts/voice-video-calling/get-started-teams-call-queue.md)
+- Working with [Teams Call Queues](../../quickstarts/voice-video-calling/get-started-teams-call-queue.md) and Azure Communication Services.
+- Working with [Teams Auto Attendants](../../quickstarts/voice-video-calling/get-started-teams-auto-attendant.md) and Azure Communication Services.
 
 To just run the completed code, In the project directory, run:
 
@@ -37,11 +50,6 @@ Your applications server will be running on [http://localhost:8080](http://local
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
