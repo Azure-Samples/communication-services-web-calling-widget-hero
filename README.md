@@ -29,10 +29,10 @@ These steps **need** to be completed before you can complete the whole experienc
 
 - [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
 - [Node.js](https://nodejs.org/), Active LTS and Maintenance LTS versions [Node 18 LTS](https://nodejs.org/en) is recommended. Use the `node --version` command to check your version.
-- An Azure Communication Services resource. [Create a Communications Resource](../../quickstarts/create-communication-resource.md)
-- Complete the Teams tenant setup in [Teams Call Queues](../../quickstarts/voice-video-calling/get-started-teams-call-queue.md)
-- Working with [Teams Call Queues](../../quickstarts/voice-video-calling/get-started-teams-call-queue.md) and Azure Communication Services.
-- Working with [Teams Auto Attendants](../../quickstarts/voice-video-calling/get-started-teams-auto-attendant.md) and Azure Communication Services.
+- An Azure Communication Services resource. [Create a Communications Resource](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp)
+- Complete the Teams tenant setup in [Teams Call Queues](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-auto-attendant#enable-interoperability-in-your-teams-tenant)
+- Working with [Teams Call Queues](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-call-queue) and Azure Communication Services.
+- Working with [Teams Auto Attendants](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-auto-attendant) and Azure Communication Services.
 
 To just run the completed code, In the project directory, run:
 
@@ -40,7 +40,14 @@ To just run the completed code, In the project directory, run:
 
 ### Swap placeholders for identifiers
 Go to the `server` folder and find the `appsettings.json` file.
-replace all values here for you Azure communication Services resouce and Teams voice apps.
+replace all values here for you Azure communication Services resource and Teams voice apps.
+```JSON
+    "ResourceConnectionString": "ENTER_CONNECTION_STRING_HERE",
+    "EndpointUrl":"ENTER_ENDPOINTURL_HERE",
+    "CallQueueId": "REPLACE_WITH_CALL_QUEUE_ID",
+    "AutoAttendantId": "REPLACE_WITH_AUTO_ATTENDANT_ID"
+```
+You can get these values from [Microsoft Graph](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-call-queue#find-object-id-for-call-queue) and your [Azure Communication Services resource](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp)
 
 ### Run the application
 
