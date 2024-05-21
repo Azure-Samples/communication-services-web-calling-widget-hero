@@ -11,7 +11,7 @@ This sample is configured as a example application for a solar company's support
 - Video Communications for a more personal experience
 - Captions **(in public preview)** for a more accessible experience
 
-Follow the setup steps [below](#pre-requisites) then use the blue button below to deploy the demo app to your Azure subscription.
+Follow the setup steps [below](#pre-requisites) then use the blue button below to deploy the demo app to your Azure subscription. If you want to see a less complicated implementation see our [JavaScript quickstart](https://github.com/Azure-Samples/communication-services-javascript-quickstarts/tree/main/ui-library-click-to-call).
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fcommunication-services-web-calling-widget-hero%2Fmain%2Fdeploy%2Fazuredeploy.json)
 
