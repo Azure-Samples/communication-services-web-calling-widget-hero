@@ -1,12 +1,17 @@
 
-# Welcome to an Azure Communication Services Calling Widget Sample
+# Connect to your Customers using Azure Communication Services Calling Widget
 
 This project is aimed to teach developers on how to create a Calling Widget using the Azure Communication UI Library.
 
 Depending on your needs, you might need to create an experience for your customers to be able to get a hold of you with minimal setup on their part.
 Calling Widget is a tool that is meant for allowing instant interaction, whether that is reaching out to customer support, having a quick call with your financial advisor, or other customer facing teams. The goal of this sample is to help make you one click away from your customers.
 
-This sample is configured as a sample application for a solar company's support page and was showcased during Microsoft Build 2024
+This sample is configured as a example application for a solar company's support page for Microsoft Build 2024. In this demo we showcase: 
+- Screensharing between agent and customer
+- Video Communications for a more personal experience
+- Captions **(in public preview)** for a more accessible experience
+
+Follow the setup steps [below](#pre-requisites) then use the blue button below to deploy the demo app to your Azure subscription.
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fcommunication-services-web-calling-widget-hero%2Fmain%2Fdeploy%2Fazuredeploy.json)
 
@@ -72,10 +77,10 @@ Since this application is meant to interact with Teams Calling Applications we w
 <img src='./media/config-tutorial-screen.png' width='1000'>
 
 You have two different actions you can take when it comes to your `ResourceConnectionString`:
-- Federate the new Azure communication services resource with your teams tenant that is made as part of your deployment. Please see our [documentation](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-call-queue) on how to do that.
+- Federate the new Azure communication services resource with your teams tenant that is made as part of your deployment. Please see our [documentation](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-call-queue) on how to do that. **Work with your Teams admin if you have any questions about these docs**.
 - Replace the `ResourceConnectionString` value for the application in your [Azure Portal](https://ms.portal.azure.com/) with the connection string that is already federated with your desired Teams tenant.
 
-Next, you will need to replace in the Application settings the two Teams Calling Application placeholder values created by the deployment:
+Next, you will need to replace in the Application settings the two Teams Calling Application placeholder values created by the deployment. These values are the Resource account ID's that can be retrieved using [Microsoft graph](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-call-queue#find-object-id-for-call-queue):
 - `AutoAttendantId`
 - `CallQueueId`
 
