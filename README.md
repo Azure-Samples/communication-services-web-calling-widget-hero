@@ -1,14 +1,15 @@
 
 # Welcome to an Azure Communication Services Calling Widget Sample
-
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fcommunication-services-web-calling-widget-hero%2Fmain%2Fdeploy%2Fazuredeploy.json)
-
-<img src='./media/sample-splash-home.png' width='1000'>
-
 This project is aimed to teach developers on how to create a Calling Widget using the Azure Communication UI Library.
 
 Depending on your needs, you might need to create an experience for your customers to be able to get a hold of you with minimal setup on their part.
 Calling Widget is a tool that is meant for allowing instant interaction, whether that is reaching out to customer support, having a quick call with your financial advisor, or other customer facing teams. The goal of this sample is to help make you one click away from your customers.
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fcommunication-services-web-calling-widget-hero%2Fmain%2Fdeploy%2Fazuredeploy.json)
+
+<img src='./media/sample-splash-home.png' width='500'>
+
+
 
 ## ❤️ Feedback
 
@@ -21,8 +22,16 @@ To just run the completed code, In the project directory, run:
 ### `npm run setup`
 
 ### Swap placeholders for identifiers
+
 Go to the `server` folder and find the `appsettings.json` file.
-replace all values here for you Azure communication Services resouce and Teams voice apps.
+replace all values here for you Azure communication Services resource and Teams voice apps.
+```JSON
+    "ResourceConnectionString": "ENTER_CONNECTION_STRING_HERE",
+    "EndpointUrl":"ENTER_ENDPOINTURL_HERE",
+    "CallQueueId": "REPLACE_WITH_CALL_QUEUE_ID",
+    "AutoAttendantId": "REPLACE_WITH_AUTO_ATTENDANT_ID"
+```
+You can get these values from [Microsoft Graph](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-call-queue#find-object-id-for-call-queue) and your [Azure Communication Services resource](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp)
 
 ### Run the application
 
@@ -61,16 +70,14 @@ This repo supports our one click deployment tools. Interact with the button abov
 
 Since this application is meant to interact with Teams Calling Applications we will need to do a few things following the completion of the deployment regarding your Azure Communication Services resource the app will use.
 
-<img src='./media/config-tutorial-screen.png' width='1000'>
+<img src='./media/config-tutorial-screen.png' width='800'>
 
 You have two different actions you can take when it comes to your `ResourceConnectionString`:
-- Federate the new Azure communication services resource with your teams tenant that is made as part of your deployment. Please see our [documentation](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-call-queue) on how to do that.
+- Federate the new Azure communication services resource with your teams tenant that is made as part of your deployment. Please see our [documentation](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-call-queue) on how to do that. **Work with your Teams admin if you have any questions about these docs**.
 - Replace the `ResourceConnectionString` value for the application in your [Azure Portal](https://ms.portal.azure.com/) with the connection string that is already federated with your desired Teams tenant.
-
-Next, you will need to replace in the Application settings the two Teams Calling Application placeholder values created by the deployment:
+Next, you will need to replace in the Application settings the two Teams Calling Application placeholder values created by the deployment. These values are the Resource account ID's that can be retrieved using [Microsoft graph](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-call-queue#find-object-id-for-call-queue):
 - `AutoAttendantId`
 - `CallQueueId`
-
 Once these two values are replaced, your application is ready to use!
 
 ## Deploying with Azure tools
