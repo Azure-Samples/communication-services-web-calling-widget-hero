@@ -16,6 +16,15 @@ Calling Widget is a tool that is meant for allowing instant interaction, whether
 We appreciate your feedback and energy helping us improve our services. [If you've tried the service, please give us feedback through this survey](https://microsoft.qualtrics.com/jfe/form/SV_9WTOR2ItSo0oFee). 
 
 ## Try It Out
+### Pre-requisites
+These steps **need** to be completed before you can complete the whole experience. Reach out to your Teams administrator if you have questions about setting up the Teams Voice Applications.
+
+- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
+- [Node.js](https://nodejs.org/), Active LTS and Maintenance LTS versions [Node 18 LTS](https://nodejs.org/en) is recommended. Use the `node --version` command to check your version.
+- An Azure Communication Services resource. [Create a Communications Resource](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp)
+- Complete the Teams tenant setup in [Teams Call Queues](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-auto-attendant#enable-interoperability-in-your-teams-tenant)
+- Working with [Teams Call Queues](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-call-queue) and Azure Communication Services.
+- Working with [Teams Auto Attendants](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/get-started-teams-auto-attendant) and Azure Communication Services.
 
 To just run the completed code, In the project directory, run:
 
