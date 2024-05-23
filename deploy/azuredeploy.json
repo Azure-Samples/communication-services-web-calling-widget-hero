@@ -14,7 +14,7 @@
     },
     "packageUrl": {
       "type": "string",
-      "defaultValue": "https://github.com/Azure-Samples/communication-services-web-calling-widget-hero/releases/download/latest/calling-widget.zip"
+      "defaultValue": "https://github.com/Azure-Samples/communication-services-web-calling-widget-hero/archive/refs/tags/Build-demo-2024.zip"
     }
   },
   "variables": {
