@@ -13,7 +13,7 @@ This sample is configured as a example application for a solar company's support
 
 Follow the setup steps [below](#pre-requisites) then use the blue button below to deploy the demo app to your Azure subscription. If you want to see a less complicated implementation see our [JavaScript quickstart](https://github.com/Azure-Samples/communication-services-javascript-quickstarts/tree/main/ui-library-click-to-call).
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fcommunication-services-web-calling-widget-hero%2FBuild-demo-2024%2Fdeploy%2Fazuredeploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fcommunication-services-web-calling-widget-hero%2Fbuild-demo-2024%2Fdeploy%2Fazuredeploy.json)
 
 <img src='./media/build-sample-splash-home.png' width='600'>
 
@@ -73,7 +73,7 @@ Your app is ready to be deployed!
 
 ## Deploying your Application
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fcommunication-services-web-calling-widget-hero%2FBuild-demo-2024%2Fdeploy%2Fazuredeploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fcommunication-services-web-calling-widget-hero%2Fbuild-demo-2024%2Fdeploy%2Fazuredeploy.json)
 
 This repo supports our one click deployment tools. Interact with the button above to deploy our latest bundled release.
 
